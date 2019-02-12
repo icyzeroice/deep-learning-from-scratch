@@ -12,7 +12,6 @@ class Relu:
         self.mask = (x <= 0)
         out = x.copy()
         out[self.mask] = 0
-
         return out
 
     def backward(self, dout):
