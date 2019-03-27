@@ -19,8 +19,36 @@ def init_network():
 
 
 def predict(network, x):
+    """
+    784 = 28 * 28
+
+    W1: (784, 50)
+    b1: 50
+    x ‧ W1 + b1 -> a1
+
+    W2: (50, 100)
+    b2: 100
+    a1 ‧ W2 + b2 -> a2
+
+    W3: (100, 10)
+    b3: 10
+    a2 ‧ W3 + b3 -> a3
+    """
     W1, W2, W3 = network['W1'], network['W2'], network['W3']
     b1, b2, b3 = network['b1'], network['b2'], network['b3']
+
+    """
+    print('784 = 28 * 28')
+    print('W1: ', len(W1), ',', len(W1[0]))
+    print('b1: ', len(b1))
+    print('x ‧ W1 + b1 -> a1')
+    print('W2: ', len(W2), ',', len(W2[0]))
+    print('b2: ', len(b2))
+    print('a1 ‧ W2 + b2 -> a2')
+    print('W3: ', len(W3), ',', len(W3[0]))
+    print('b3: ', len(b3))
+    print('a2 ‧ W3 + b3 -> a3')
+    """
 
     a1 = np.dot(x, W1) + b1
     z1 = sigmoid(a1)
