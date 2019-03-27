@@ -46,8 +46,17 @@ def _load_label(file_name):
 
     print("Converting " + file_name + " to NumPy Array ...")
     with gzip.open(file_path, 'rb') as f:
-            labels = np.frombuffer(f.read(), np.uint8, offset=8)
+        labels = np.frombuffer(f.read(), np.uint8, offset=8) 
     print("Done")
+
+    """Example
+    Converting train-labels-idx1-ubyte.gz to NumPy Array ...
+    [5 0 4 ... 5 6 8]
+    Done
+    Converting t10k-labels-idx1-ubyte.gz to NumPy Array ...
+    [7 2 1 ... 4 5 6]
+    Done
+    """
 
     return labels
 
@@ -56,7 +65,7 @@ def _load_img(file_name):
 
     print("Converting " + file_name + " to NumPy Array ...")
     with gzip.open(file_path, 'rb') as f:
-            data = np.frombuffer(f.read(), np.uint8, offset=16)
+        data = np.frombuffer(f.read(), np.uint8, offset=16)
     data = data.reshape(-1, img_size)
     print("Done")
 
@@ -80,6 +89,23 @@ def init_mnist():
     print("Done!")
 
 def _change_one_hot_label(X):
+    """
+    Parameters
+    ---
+    X : [0, 3, 9 ..., 1]
+
+
+    Returns
+    ---
+    [
+        [1 0 0 0 0 0 0 0 0 0]
+        [0 0 0 1 0 0 0 0 0 0]
+        [0 0 0 0 0 0 0 0 0 1]
+        ...
+        [0 1 0 0 0 0 0 0 0 0]
+    ]
+    """
+    
     T = np.zeros((X.size, 10))
     for idx, row in enumerate(T):
         row[X[idx]] = 1
@@ -118,7 +144,7 @@ def load_mnist(normalize=True, flatten=True, one_hot_label=False):
         dataset['test_label'] = _change_one_hot_label(dataset['test_label'])
 
     if not flatten:
-         for key in ('train_img', 'test_img'):
+        for key in ('train_img', 'test_img'):
             dataset[key] = dataset[key].reshape(-1, 1, 28, 28)
 
     return (dataset['train_img'], dataset['train_label']), (dataset['test_img'], dataset['test_label'])
@@ -126,3 +152,9 @@ def load_mnist(normalize=True, flatten=True, one_hot_label=False):
 
 if __name__ == '__main__':
     init_mnist()
+
+    from PIL import Image
+    (train_img, train_label), (test_img, test_label) = load_mnist(False, False, False)
+    # show image example
+    Image.fromarray(test_img[0][0]).show()
+    print(test_label[0])
