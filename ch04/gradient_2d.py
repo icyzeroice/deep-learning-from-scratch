@@ -6,6 +6,13 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def _numerical_gradient_no_batch(f, x):
+    """
+    Args:
+        f: function
+        x: float array
+    Returns:
+        gradient
+    """
     h = 1e-4  # 0.0001
     grad = np.zeros_like(x)
     

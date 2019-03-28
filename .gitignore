@@ -6,3 +6,4 @@ __pycache__/
 mnist.pkl
 
 .ipynb_checkpoints
+.vscode

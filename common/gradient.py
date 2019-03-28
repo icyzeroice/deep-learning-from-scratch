@@ -2,6 +2,15 @@
 import numpy as np
 
 def _numerical_gradient_1d(f, x):
+    """Get gradient from 1d list
+
+    Args:
+        f: function
+        x: 
+    Returns:
+        Get the result of gradient
+
+    """
     h = 1e-4 # 0.0001
     grad = np.zeros_like(x)
     
@@ -50,3 +59,7 @@ def numerical_gradient(f, x):
         it.iternext()   
         
     return grad
+
+if __name__ == "__main__":
+    y1 = lambda x: x[0] ** 2 + x[1] ** 2
+    print(_numerical_gradient_1d(y1, np.array([3.0, 4.0])))
