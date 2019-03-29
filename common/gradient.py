@@ -44,6 +44,7 @@ def numerical_gradient(f, x):
     h = 1e-4 # 0.0001
     grad = np.zeros_like(x)
 
+    # nditer 为列表的迭代器
     it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
     while not it.finished:
         idx = it.multi_index

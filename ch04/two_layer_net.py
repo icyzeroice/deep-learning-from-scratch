@@ -79,6 +79,7 @@ class TwoLayerNet:
             梯度
         """
 
+        # TODO: I can not figure out this
         loss_W = lambda W: self.loss(x, t)
 
         grads = {}

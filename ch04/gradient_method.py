@@ -20,7 +20,7 @@ def gradient_descent(f, init_x, lr=0.01, step_num=100):
 def function_2(x):
     return x[0]**2 + x[1]**2
 
-init_x = np.array([-3.0, 4.0])    
+init_x = np.array([-3.0, 4.0])
 
 lr = 0.1
 step_num = 2000
